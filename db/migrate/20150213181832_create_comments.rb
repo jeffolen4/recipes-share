@@ -5,7 +5,7 @@ class CreateComments < ActiveRecord::Migration
       t.integer :star_rating
       t.references :recipe, index: true
 
-      t.timestamps null: false
+      t.timestamps null: true
     end
     add_foreign_key :comments, :recipes
   end

@@ -5,7 +5,7 @@ class CreateRecipes < ActiveRecord::Migration
       t.text :directions
       t.integer :rating
 
-      t.timestamps null: false
+      t.timestamps null: true
     end
   end
 end

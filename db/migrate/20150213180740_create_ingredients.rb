@@ -6,7 +6,7 @@ class CreateIngredients < ActiveRecord::Migration
       t.string :uom
       t.references :recipe, index: true
 
-      t.timestamps null: false
+      t.timestamps null: true
     end
     add_foreign_key :ingredients, :recipes
   end
