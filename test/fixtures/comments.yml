@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  comments: MyText
+  star_rating: 1
+  recipe_id: 
+
+two:
+  comments: MyText
+  star_rating: 1
+  recipe_id: 
