@@ -1,6 +1,11 @@
-<h1>Editing Recipe</h1>
+<% content_for(:title, "Edit Recipe | RecipeBlogger") %>
 
-<%= render 'form' %>
+<div class="container">
+  <div class="row">
 
-<%= link_to 'Show', @recipe %> |
-<%= link_to 'Back', recipes_path %>
+    <h1>Editing Recipe</h1>
+
+    <%= render('form', :object => { "action" => "edit" } ) %>
+
+  </div>
+</div>

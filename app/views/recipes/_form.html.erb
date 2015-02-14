@@ -19,11 +19,17 @@
     <%= f.label :directions %><br>
     <%= f.text_area :directions %>
   </div>
-  <div class="field">
-    <%= f.label :rating %><br>
-    <%= f.number_field :rating %>
+
+  <input id="_method" name="_method" type="hidden" value="post">
+  <div class="btn-group btn-group-med">
+    <% if object["action"] == "create" %>
+      <button class="btn btn-primary" type="button" id="btn-create">Create</button>
+    <% end %>
+    <% if object["action"] == "edit" %>
+      <button class="btn btn-primary" type="button" id="btn-update-<%= @recipe.id %>">Update</button>
+      <button class="btn btn-primary" type="button" id="btn-show-<%= @recipe.id %>">Show</button>
+    <% end %>
+    <button class="btn btn-primary" type="button" id="btn-back">Back</button>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
 <% end %>
