@@ -19,6 +19,9 @@ class RecipesController < ApplicationController
 
   # GET /recipes/1/edit
   def edit
+    if @recipe.ingredients == nil || @recipe.ingredients.count == 0
+      @recipe.ingredients << Ingredient.new
+    end
   end
 
   # POST /recipes

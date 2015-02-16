@@ -1,35 +1,97 @@
-<%= form_for(@recipe) do |f| %>
-  <% if @recipe.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
 
-      <ul>
+<form class="form-styled" role="form" method="post" action="/recipes/<%= @recipe.id %>">
+  <input type="hidden" name="recipe_id" id="recipe_id" value="<%= @recipe.id %>">
+
+  <%= fields_for @recipe do |f| %>
+  <% if @recipe.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+
+    <ul>
       <% @recipe.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+      <li><%= message %></li>
       <% end %>
-      </ul>
-    </div>
+    </ul>
+  </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :directions %><br>
-    <%= f.text_area :directions %>
-  </div>
+<table class="table">
+  <tr>
+    <td><%= label( :recipe, :name) %></td>
+    <td><%= text_field( :recipe, :name, size: 40 ) %></td>
+  </tr>
+  <tr>
+    <td><%= label( :recipe, :directions) %></td>
+    <td><%= text_area( :recipe, :directions, class: "textarea-styled" ) %></td>
+  </tr>
+</table>
+<% end %>
+  <br>
 
+  <h3>Ingredients</h3>
+  <table class="table table-hover table-bordered">
+    <thead>
+      <tr>
+        <th class="col-sm-4"><%= label( :ingredient, :name   ) %></th>
+        <th class="col-sm-1"><%= label( :ingredient, :amount ) %></th>
+        <th class="col-sm-1"><%= label( :ingredient, :uom    ) %></th>
+        <th class="col-sm-1" align="right">Action</th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <td colspan=4 align="center">
+          <p>
+          <button class="btn btn-primary" type="button" id="btn-add-ingredient" aria-label="Left Align">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Ingredient
+          </button>
+          &nbsp;Click on ingredient(s) to edit</p>
+        </td>
+      </tr>
+    </tfoot>
+    <tbody>
+      <% @recipe.ingredients.each do |ing| %>
+      <tr>
+        <%= fields_for ing do |ing_form| %>
+        <td>
+          <input type="hidden" name="ingredient_id<%= ing.id %>" id="ingredient_id<%= ing.id %>" value="<%= ing.id %>">
+          <div class="form-group field">
+            <%= ing.name %>
+          </div>
+        </td>
+        <td>
+          <div class="form-group field">
+            <%= ing.amount %>
+          </div>
+        </td>
+        <td>
+          <div class="form-group field">
+            <%= ing.uom %>
+          </div>
+        </td>
+        <td>
+          <div class="btn-group btn-group-sm">
+            <button class="btn btn-primary" type="button" id="btn-delete-ingredient-<%= ing.id %>" aria-label="Left Align">
+              <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+            </button>
+          </div>
+        </td>
+        <br>
+        <% end %>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
   <input id="_method" name="_method" type="hidden" value="post">
   <div class="btn-group btn-group-med">
     <% if object["action"] == "create" %>
-      <button class="btn btn-primary" type="button" id="btn-create">Create</button>
+    <button class="btn btn-primary" type="button" id="btn-create-recipe">Create</button>
     <% end %>
     <% if object["action"] == "edit" %>
-      <button class="btn btn-primary" type="button" id="btn-update-<%= @recipe.id %>">Update</button>
-      <button class="btn btn-primary" type="button" id="btn-show-<%= @recipe.id %>">Show</button>
+    <button class="btn btn-primary" type="button" id="btn-update-recipe-<%= @recipe.id %>">Update</button>
+    <button class="btn btn-primary" type="button" id="btn-show-recipe-<%= @recipe.id %>">Show</button>
     <% end %>
-    <button class="btn btn-primary" type="button" id="btn-back">Back</button>
+    <button class="btn btn-primary" type="button" id="btn-back-recipe">Back</button>
   </div>
-
-<% end %>
+</form>

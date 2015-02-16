@@ -5,8 +5,8 @@ $(document).on ('page:change', function() {
   buttons.click( function (event) {
 
     current_id = event.currentTarget.id
-    form_element = event.currentTarget.parentElement.parentElement
-
+    form_element = event.currentTarget.form
+    
     switch ( true ) {
 
       // user clicked on back from pretty much anywhere
