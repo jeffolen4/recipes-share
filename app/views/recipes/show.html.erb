@@ -1,19 +1,70 @@
-<p id="notice"><%= notice %></p>
+<% content_for(:title, "View Recipe | RecipeBlogger") %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @recipe.name %>
-</p>
+<div class="container">
+  <div class="row">
 
-<p>
-  <strong>Directions:</strong>
-  <%= @recipe.directions %>
-</p>
+    <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Rating:</strong>
-  <%= @recipe.rating %>
-</p>
+    <h2>Viewing Recipe</h2>
 
-<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
-<%= link_to 'Back', recipes_path %>
+
+    <table class="table">
+      <tr>
+        <td><%= label( :recipe, :name ) %></td>
+        <td><%= text_field( :recipe, :name, size: 40, disabled: "disabled" ) %></td>
+      </tr>
+      <tr>
+      <th>Ingredients</th>
+      <td>
+        <table class="table table-hover table-bordered">
+          <thead>
+            <tr>
+              <th class="col-sm-4"><%= label( :ingredient, :name   ) %></th>
+              <th class="col-sm-1"><%= label( :ingredient, :amount ) %></th>
+              <th class="col-sm-1"><%= label( :ingredient, :uom    ) %></th>
+            </tr>
+          </thead>
+
+          <tfoot>
+          </tfoot>
+
+          <tbody>
+            <%= form_for @recipe do |f| %>
+            <%= f.fields_for :ingredients do |ing_form| %>
+            <tr>
+              <td>
+                <%= ing_form.hidden_field :id %>
+                <div class="form-group field">
+                  <%= ing_form.object.name %>
+                </div>
+              </td>
+              <td>
+                <div class="form-group field">
+                  <%= ing_form.object.amount %>
+                </div>
+              </td>
+              <td>
+                <div class="form-group field">
+                  <%= ing_form.object.uom %>
+                </div>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+
+        </table>
+      </td>
+      <tr>
+        <td><%= label( :recipe, :directions) %></td>
+        <td><%= text_area( :recipe, :directions, class: "textarea-styled", disabled: "disabled" ) %></td>
+      </tr>
+    </table>
+
+    <br>
+    <div class="btn-group">
+      <button class="btn btn-primary" type="button" id="btn-edit-recipe-<%= @recipe.id %>">Edit</button>
+      <button class="btn btn-primary" type="button" id="btn-back-recipe">Back</button>
+    </div>
+    <% end %>
+  </div>
+</div>
