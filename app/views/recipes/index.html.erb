@@ -20,9 +20,9 @@
           </tr>
         </thead>
 
-        <tbody>
+        <tbody id="recipe-body">
           <% @recipes.each do |recipe| %>
-          <tr>
+          <tr id="recipe-<%= recipe.id %>">
             <td><%= recipe.name %></td>
             <td><%= recipe.rating %></td>
             <td>

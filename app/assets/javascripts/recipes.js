@@ -2,21 +2,32 @@ $(document).on ('page:change', function() {
 
   var buttons = $("[id^=btn-]");
 
-  var ing_list = $(".ingredient-row")
+  var ing_list = $(".ingredient-body");
 
-  ing_list.focusout( function (event) {
-    current_id = event.currentTarget.id;
-    elem = event.currentTarget;
-    // if this is the last row in the ingredient table
-    if ( elem == event.currentTarget.parentElement.lastElementChild ) {
+  // ing_list.focusout( function (event) {
+  //   current_id = event.target.id;
+  //   elem = event.target.parentElement.parentElement.parentElement;
+  //   elem_id_match = current_id.match(/uom/) == null ? [] : current_id.match(/uom/)[0]
+  //
+  //   // if this is the last row in the ingredient table
+  //   if ( elem == event.currentTarget.lastElementChild &&
+  //         elem_id_match == "uom"  &&
+  //         $(event.target).val() != '' ) {
+  //     tbody = event.currentTarget;
+  //     $(tbody).append( $(new_row) );
+  //   };
+  //
+  // });
 
-      if ( current_id.match(/uom/) == "uom" && elem.val() != '' ) {
-        tbody = event.currentTarget.parentElement;
-        $(tbody).append( $(elem).clone() )
-      };
-    };
-  });
-
+    $("#recipe-body").click( function (event) {
+      recipe_id = event.target.parentElement.id.slice(7);
+      form_element = event.currentTarget.parentElement.parentElement;
+      $("#_method").val("get");
+      $(form_element).attr("method","get" );
+      $(form_element).attr("action","/recipes/" + recipe_id );
+      $(form_element).submit();
+      return false;
+    });
 
   buttons.click( function (event) {
 
@@ -29,6 +40,14 @@ $(document).on ('page:change', function() {
      * Ingredient related button clicks
      * ==================================================================
      */
+
+    // user clicked on an delete button in the list
+    case ( current_id.match(/^btn-add-ingredient/) == "btn-add-ingredient" ) :
+      $("#_method").val("post");
+      $(form_element).attr("method","post" );
+      $(form_element).attr("action","/add_new_ingredient/" + $("#recipe_id").val() );
+      $(form_element).submit()
+      break;
 
      // user clicked on an delete button in the list
      case ( current_id.match(/^btn-delete-ingredient/) == "btn-delete-ingredient" ) :

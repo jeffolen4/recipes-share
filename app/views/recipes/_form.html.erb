@@ -14,7 +14,7 @@
 <table class="table">
   <tr>
     <td><%= label( :recipe, :name) %></td>
-    <td><%= text_field( :recipe, :id ) %>
+    <td><%= hidden_field( :recipe, :id ) %>
       <%= text_field( :recipe, :name, size: 40 ) %></td>
   </tr>
   <tr>
@@ -35,18 +35,20 @@
           <td colspan=4 align="center">
             <p>
             <button class="btn btn-primary" type="button" id="btn-add-ingredient" aria-label="Left Align">
-              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Ingredient
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Ingredients
             </button>
             &nbsp;Click on ingredient(s) to edit</p>
           </td>
         </tr>
       </tfoot>
 
-      <tbody>
+      <tbody class="ingredient-body">
         <%= f.fields_for :ingredients do |ing_form| %>
-        <tr class="ingredient-row">
-          <td>
+        <tr>
+          <td class="hidden">
             <%= ing_form.hidden_field :id %>
+          </td>
+          <td>
             <div class="form-group field">
               <%= ing_form.text_field :name %>
             </div>
@@ -97,3 +99,7 @@
   </div>
   </form>
 <% end %>
+
+<!-- Cloning items -->
+<table>
+</table>

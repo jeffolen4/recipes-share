@@ -15,6 +15,10 @@ class IngredientsController < ApplicationController
   # GET /ingredients/new
   def new
     @ingredient = Ingredient.new
+    if params["recipe_id"] != nil
+      @ingredient.recipe_id = params["recipe_id"].to_i
+    end
+    return @ingredient
   end
 
   # GET /ingredients/1/edit
