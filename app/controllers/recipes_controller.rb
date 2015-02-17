@@ -61,6 +61,20 @@ class RecipesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  #
+  # def add_another_ingredient
+  #   @recipe = Recipe.find(params[:id])
+  #   respond_to do |format|
+  #     if @recipe.update(recipe_params)
+  #       FormHelper::setup_recipe( @recipe )
+  #       format.html { redirect_to :controller => "recipe", :action => "edit", :id => @recipe.id }
+  #     else
+  #       format.html { render :edit }
+  #       format.json { render json: @recipe.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

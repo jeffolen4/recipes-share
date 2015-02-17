@@ -14,7 +14,8 @@
 <table class="table">
   <tr>
     <td><%= label( :recipe, :name) %></td>
-    <td><%= text_field( :recipe, :name, size: 40 ) %></td>
+    <td><%= text_field( :recipe, :id ) %>
+      <%= text_field( :recipe, :name, size: 40 ) %></td>
   </tr>
   <tr>
   <th>Ingredients</th>
@@ -24,7 +25,7 @@
         <tr>
           <th class="col-sm-4"><%= label( :ingredient, :name   ) %></th>
           <th class="col-sm-1"><%= label( :ingredient, :amount ) %></th>
-          <th class="col-sm-1"><%= label( :ingredient, :uom    ) %></th>
+          <th class="col-sm-1"><%= label( :ingredient, :uom,   ) %></th>
           <th class="col-sm-1" align="right">Action</th>
         </tr>
       </thead>
@@ -43,7 +44,7 @@
 
       <tbody>
         <%= f.fields_for :ingredients do |ing_form| %>
-        <tr>
+        <tr class="ingredient-row">
           <td>
             <%= ing_form.hidden_field :id %>
             <div class="form-group field">

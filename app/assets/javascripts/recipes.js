@@ -2,6 +2,22 @@ $(document).on ('page:change', function() {
 
   var buttons = $("[id^=btn-]");
 
+  var ing_list = $(".ingredient-row")
+
+  ing_list.focusout( function (event) {
+    current_id = event.currentTarget.id;
+    elem = event.currentTarget;
+    // if this is the last row in the ingredient table
+    if ( elem == event.currentTarget.parentElement.lastElementChild ) {
+
+      if ( current_id.match(/uom/) == "uom" && elem.val() != '' ) {
+        tbody = event.currentTarget.parentElement;
+        $(tbody).append( $(elem).clone() )
+      };
+    };
+  });
+
+
   buttons.click( function (event) {
 
     current_id = event.currentTarget.id
@@ -13,14 +29,6 @@ $(document).on ('page:change', function() {
      * Ingredient related button clicks
      * ==================================================================
      */
-
-     // user clicked on the add button on the main recipes list
-     case ( current_id.match(/^btn-add-ingredient/) == "btn-add-ingredient" ) :
-       $("#_method").val("get");
-       $(form_element).attr("method","get" );
-       $(form_element).attr("action","/recipes/" + $("#recipe_id").val() + "/ingredients/new" );
-       $(form_element).submit()
-       break;
 
      // user clicked on an delete button in the list
      case ( current_id.match(/^btn-delete-ingredient/) == "btn-delete-ingredient" ) :
