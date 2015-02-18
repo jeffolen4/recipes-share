@@ -2,23 +2,6 @@ $(document).on ('page:change', function() {
 
   var buttons = $("[id^=btn-]");
 
-  var ing_list = $(".ingredient-body");
-
-  // ing_list.focusout( function (event) {
-  //   current_id = event.target.id;
-  //   elem = event.target.parentElement.parentElement.parentElement;
-  //   elem_id_match = current_id.match(/uom/) == null ? [] : current_id.match(/uom/)[0]
-  //
-  //   // if this is the last row in the ingredient table
-  //   if ( elem == event.currentTarget.lastElementChild &&
-  //         elem_id_match == "uom"  &&
-  //         $(event.target).val() != '' ) {
-  //     tbody = event.currentTarget;
-  //     $(tbody).append( $(new_row) );
-  //   };
-  //
-  // });
-
     $("#recipe-body").click( function (event) {
       recipe_id = event.target.parentElement.id.slice(7);
       form_element = event.currentTarget.parentElement.parentElement;
@@ -113,6 +96,15 @@ $(document).on ('page:change', function() {
       case ( current_id.match(/^btn-delete-recipe/) == "btn-delete-recipe" ) :
         $("#_method").val("delete");
         $(form_element).attr("action","/recipes/" + current_id.slice(18) );
+        $(form_element).submit()
+        break;
+
+
+      // user clicked on the add button on the main recipes list
+      case ( current_id.match(/^btn-add-comment/) == "btn-add-comment" ) :
+        $("#_method").val("get");
+        $(form_element).attr("method","get" );
+        $(form_element).attr("action","/recipes/" + $("#recipe_id").val() + "/comments/new" );
         $(form_element).submit()
         break;
 

@@ -1,15 +1,21 @@
 class IngredientsController < ApplicationController
+  before_filter :set_recipe
   before_action :set_ingredient, only: [:show, :edit, :update, :destroy]
+
+  def set_recipe
+    @recipe = Recipe.find(params[:recipe_id])
+  end
 
   # GET /ingredients
   # GET /ingredients.json
   def index
-    @ingredients = Ingredient.all
+    @ingredients = @recipe.ingredients
   end
 
   # GET /ingredients/1
   # GET /ingredients/1.json
   def show
+    @ingredient = @recipe.ingredients.find(params[:id])
   end
 
   # GET /ingredients/new

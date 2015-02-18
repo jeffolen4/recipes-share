@@ -17,9 +17,4 @@ class Recipe < ActiveRecord::Base
     :allow_destroy => true,
     :reject_if => :all_blank
 
-
-  # def initialize
-  #   @ingredients = []
-  # end
-
 end

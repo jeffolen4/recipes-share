@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root 'recipes#index'
 
   resources :recipes do
-    resources :commments
+    resources :comments
     resources :ingredients
     resources :recipe_tags
   end
