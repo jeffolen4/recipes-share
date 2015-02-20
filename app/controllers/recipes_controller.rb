@@ -1,10 +1,12 @@
+require 'form_helper'
+
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
   # GET /recipes
   # GET /recipes.json
   def index
-    @recipes = Recipe.all
+    @recipes = Recipe.includes(:ingredients).all
   end
 
   # GET /recipes/1
@@ -15,6 +17,7 @@ class RecipesController < ApplicationController
   # GET /recipes/new
   def new
     @recipe = Recipe.new
+    # @recipe.ingredients.build
   end
 
   # GET /recipes/1/edit
@@ -61,6 +64,22 @@ class RecipesController < ApplicationController
     end
   end
 
+
+  def new_ingredient
+    @recipe = Recipe.find(params[:id])
+    respond_to do |format|
+      if @recipe.update(recipe_params)
+        2.times do
+          @recipe.ingredients << Ingredient.new({ "recipe_id" => params[:id] });
+        end
+        format.html { redirect_to edit_recipe_path( { :param_1 => @recipe.id } ) }
+      else
+        format.html { render :edit }
+        format.json { render json: @recipe.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_recipe
@@ -69,6 +88,6 @@ class RecipesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_params
-      params.require(:recipe).permit(:name, :directions, :rating)
+      params.require(:recipe).permit(:name, :directions, :rating, ingredients_attributes: [:id, :name, :amount, :uom])
     end
 end
