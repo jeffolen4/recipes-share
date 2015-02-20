@@ -1,10 +1,15 @@
 class TagsController < ApplicationController
+  before_filter :set_recipe
   before_action :set_tag, only: [:show, :edit, :update, :destroy]
+
+  def set_recipe
+    @recipe = Recipe.find(params[:recipe_id])
+  end
 
   # GET /tags
   # GET /tags.json
   def index
-    @tags = Tag.all
+    @tags = Recipe.tags
   end
 
   # GET /tags/1

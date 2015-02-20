@@ -3,7 +3,8 @@ $(document).on ('page:change', function() {
   var buttons = $("[id^=btn-]");
 
     $("#recipe-body").click( function (event) {
-      recipe_id = event.target.parentElement.id.slice(7);
+      target = event.target
+      recipe_id = $(target).closest("tr")[0].id.slice(7);
       form_element = event.currentTarget.parentElement.parentElement;
       $("#_method").val("get");
       $(form_element).attr("method","get" );
