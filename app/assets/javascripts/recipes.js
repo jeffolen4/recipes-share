@@ -15,8 +15,9 @@ $(document).on ('page:change', function() {
 
   buttons.click( function (event) {
 
-    current_id = event.currentTarget.id
-    form_element = event.currentTarget.form
+    current_id = event.currentTarget.id;
+    form_element = event.currentTarget.form;
+    event.stopPropagation();
 
     switch ( true ) {
 
