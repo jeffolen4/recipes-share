@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  directions: MyText
+
+
+cookies:
+  name: Chocolate chip cookies
+  directions: Roll the dough into one inch spheres and then place on cookie sheet
   rating: 1
 
-two:
-  name: MyString
-  directions: MyText
-  rating: 1
+eggsnham:
+  name: Green Eggs and Ham
+  directions: Fry the eggs over medium and add green food coloring
+  rating: 3

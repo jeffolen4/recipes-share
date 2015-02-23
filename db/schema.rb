@@ -17,14 +17,13 @@ ActiveRecord::Schema.define(version: 20150220213355) do
   enable_extension "plpgsql"
 
   create_table "comments", force: :cascade do |t|
-    t.text     "comments"
-    t.integer  "star_rating"
+    t.text     "comment"
+    t.integer  "rating"
+    t.string   "entered_by"
     t.integer  "recipe_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "comments", ["recipe_id"], name: "index_comments_on_recipe_id", using: :btree
 
   create_table "ingredients", force: :cascade do |t|
     t.string   "name"
@@ -34,8 +33,6 @@ ActiveRecord::Schema.define(version: 20150220213355) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "ingredients", ["recipe_id"], name: "index_ingredients_on_recipe_id", using: :btree
 
   create_table "recipes", force: :cascade do |t|
     t.string   "name"

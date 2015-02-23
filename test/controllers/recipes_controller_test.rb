@@ -2,7 +2,7 @@ require 'test_helper'
 
 class RecipesControllerTest < ActionController::TestCase
   setup do
-    @recipe = recipes(:one)
+    @recipe = recipes(:cookies)
   end
 
   test "should get index" do

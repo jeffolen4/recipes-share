@@ -1,13 +1,31 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  amount: MyString
-  uom: MyString
-  recipe_id: 
+one_1:
+  name: sugar
+  amount: 1
+  uom: cup
+  recipe: cookies
 
-two:
-  name: MyString
-  amount: MyString
-  uom: MyString
-  recipe_id: 
+one_2:
+  name: flour
+  amount: 1
+  uom: cup
+  recipe: cookies
+
+one_3:
+  name: vanilla
+  amount: 1/8
+  uom: teaspoon
+  recipe: cookies
+
+two_1:
+  name: eggs
+  amount: 2
+  uom: large
+  recipe: eggsnham
+
+two_2:
+  name: ham
+  amount: 1
+  uom: medium slice
+  recipe: eggsnham

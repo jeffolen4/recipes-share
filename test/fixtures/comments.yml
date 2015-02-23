@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  comments: MyText
-  star_rating: 1
-  recipe_id: 
+  comment: OMG Chocolate chip cookies!
+  rating: 5
+  entered_by: no one
+  recipe: cookies
 
 two:
-  comments: MyText
-  star_rating: 1
-  recipe_id: 
+  comment: Ewww! Green eggs?!
+  rating: 1
+  entered_by: no one
+  recipe: eggsnham
