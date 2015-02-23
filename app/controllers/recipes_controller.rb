@@ -6,7 +6,7 @@ class RecipesController < ApplicationController
   # GET /recipes
   # GET /recipes.json
   def index
-    @recipes = Recipe.includes(:ingredients).all
+    @recipes = Recipe.includes(:ingredients, :comments).all
   end
 
   # GET /recipes/1
@@ -22,6 +22,7 @@ class RecipesController < ApplicationController
 
   # GET /recipes/1/edit
   def edit
+    logger.debug "attempting to edit. params: #{params}"
   end
 
   # POST /recipes

@@ -72,6 +72,7 @@
         <thead>
           <tr>
             <th class="col-sm-8">Comments</th>
+            <th class="col-sm-2">Entered By</th>
             <th class="col-sm-1">Stars</th>
           </tr>
         </thead>
@@ -85,12 +86,17 @@
             <td>
               <%= comment.hidden_field :id %>
               <div class="form-group field">
-                <%= comment.object.comments %>
+                <%= comment.object.comment %>
               </div>
             </td>
             <td>
               <div class="form-group field">
-                <%= comment.object.star_rating %>
+                <%= comment.object.entered_by %>
+              </div>
+            </td>
+            <td>
+              <div class="form-group field">
+                <%= comment.object.rating %>
               </div>
             </td>
           </tr>

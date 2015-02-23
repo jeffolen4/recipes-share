@@ -2,10 +2,6 @@ class IngredientsController < ApplicationController
   before_filter :set_recipe
   before_action :set_ingredient, only: [:show, :edit, :update, :destroy]
 
-  def set_recipe
-    @recipe = Recipe.find(params[:recipe_id])
-  end
-
   # GET /ingredients
   # GET /ingredients.json
   def index
@@ -35,10 +31,10 @@ class IngredientsController < ApplicationController
   # POST /ingredients.json
   def create
     @ingredient = Ingredient.new(ingredient_params)
-
+    @ingredient.recipe_id = @recipe.id
     respond_to do |format|
       if @ingredient.save
-        format.html { redirect_to @ingredient, notice: 'Ingredient was successfully created.' }
+        format.html { redirect_to recipe_ingredient_path(@recipe.id, @ingredient.id), notice: 'Ingredient was successfully created.' }
         format.json { render :show, status: :created, location: @ingredient }
       else
         format.html { render :new }
@@ -52,7 +48,7 @@ class IngredientsController < ApplicationController
   def update
     respond_to do |format|
       if @ingredient.update(ingredient_params)
-        format.html { redirect_to @ingredient, notice: 'Ingredient was successfully updated.' }
+        format.html { redirect_to recipe_ingredient_path(@recipe.id, @ingredient.id), notice: 'Ingredient was successfully updated.' }
         format.json { render :show, status: :ok, location: @ingredient }
       else
         format.html { render :edit }
@@ -73,6 +69,11 @@ class IngredientsController < ApplicationController
   end
 
   private
+
+  def set_recipe
+    @recipe = Recipe.find(params[:recipe_id])
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_ingredient
     @ingredient = Ingredient.find(params[:id])
@@ -80,6 +81,6 @@ class IngredientsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def ingredient_params
-    params[:ingredient]
+    params.require(:ingredient).permit(:id, :name, :amount, :uom, :recipe_id )
   end
 end

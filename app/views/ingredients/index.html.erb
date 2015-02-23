@@ -12,9 +12,9 @@
   <tbody>
     <% @ingredients.each do |ingredient| %>
       <tr>
-        <td><%= link_to 'Show', ingredient %></td>
-        <td><%= link_to 'Edit', edit_ingredient_path(ingredient) %></td>
-        <td><%= link_to 'Destroy', ingredient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', recipe_ingredient_path(@recipe.id, ingredient.id) %></td>
+        <td><%= link_to 'Edit', edit_recipe_ingredient_path(@recipe.id, ingredient.id) %></td>
+        <td><%= link_to 'Destroy', recipe_ingredient_path(@recipe.id, ingredient.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +22,4 @@
 
 <br>
 
-<%= link_to 'New Ingredient', new_ingredient_path %>
+<%= link_to 'New Ingredient', new_recipe_ingredient_path(@recipe.id) %>
