@@ -14,7 +14,9 @@
 <table class="table">
   <tr>
     <td><%= label( :recipe, :name) %></td>
-    <td><%= hidden_field( :recipe, :id ) %>
+    <td><%= if f.object.persisted?
+        hidden_field( :recipe, :id )
+      end %>
       <%= text_field( :recipe, :name, size: 40 ) %></td>
   </tr>
   <tr>
@@ -34,7 +36,8 @@
         <tr>
           <td colspan=4 align="center">
             <p>
-            <button class="btn btn-primary" type="button" id="btn-add-ingredient" aria-label="Left Align">
+            <button class="btn btn-primary" type="button" id="btn-add-ingredient"
+                  data-new-row="<%= f.object.persisted? ? "N" : "Y" %>"  aria-label="Left Align">
               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Ingredients
             </button>
             &nbsp;Click on ingredient(s) to edit</p>
@@ -46,7 +49,9 @@
         <%= f.fields_for :ingredients do |ing_form| %>
         <tr>
           <td class="hidden">
+            <% if ing_form.object.persisted? %>
             <%= ing_form.hidden_field :id %>
+            <% end %>
           </td>
           <td>
             <div class="form-group field">

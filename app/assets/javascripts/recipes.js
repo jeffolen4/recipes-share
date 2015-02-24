@@ -30,7 +30,11 @@ $(document).on ('page:change', function() {
     case ( current_id.match(/^btn-add-ingredient/) == "btn-add-ingredient" ) :
       $("#_method").val("post");
       $(form_element).attr("method","post" );
-      $(form_element).attr("action","/add_new_ingredient/" + $("#recipe_id").val() );
+      if ( $(event.target).data("new-row") == "Y") {
+        $(form_element).attr("action","/add_new_ingredient/" + 0 + "/" + $(event.target).data("new-row") );
+      } else {
+        $(form_element).attr("action","/add_new_ingredient/" + $("#recipe_id").val() + "/" + $(event.target).data("new-row") );
+      }
       $(form_element).submit()
       break;
 

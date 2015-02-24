@@ -8,9 +8,7 @@ Rails.application.routes.draw do
     resources :recipe_tags
   end
 
-  #resources :ingredients
-
-#  match '/add_new_ingredient/:id', to: 'recipes#new_ingredient', via: [:post]
+  match '/add_new_ingredient/:id/:newrow', to: 'recipes#new_ingredient', via: [:post]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

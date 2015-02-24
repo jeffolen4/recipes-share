@@ -67,13 +67,20 @@ class RecipesController < ApplicationController
 
 
   def new_ingredient
-    @recipe = Recipe.find(params[:id])
     respond_to do |format|
-      if @recipe.update(recipe_params)
+      if params["newrow"] == "Y"
+        @recipe = Recipe.new(recipe_params)
+        @recipe.save
+      else
+        @recipe = Recipe.find(params[:id])
+        @recipe.update(recipe_params)
+      end
+
+      if !@recipe.errors.any?
         2.times do
           @recipe.ingredients << Ingredient.new({ "recipe_id" => params[:id] });
         end
-        format.html { redirect_to edit_recipe_path( { :param_1 => @recipe.id } ) }
+        format.html { redirect_to edit_recipe_path(@recipe.id) }
       else
         format.html { render :edit }
         format.json { render json: @recipe.errors, status: :unprocessable_entity }
