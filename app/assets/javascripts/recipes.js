@@ -41,18 +41,20 @@ $(document).on ('page:change', function() {
 
       // user clicked on back from pretty much anywhere
       case ( current_id.match(/^btn-back-recipe/) == "btn-back-recipe" ) :
-        $("#_method").val("get");
-        $(form_element).attr("action","/recipes" );
-        $(form_element).attr("method","get" );
-        $(form_element).submit()
+        window.location.href = "/recipes"
+        // $("#_method").val("get");
+        // $(form_element).attr("action","/recipes" );
+        // $(form_element).attr("method","get" );
+        // $(form_element).submit()
         break;
 
       // user clicked on back from pretty much anywhere
       case ( current_id.match(/^btn-show-recipe/) == "btn-show-recipe" ) :
-        $("#_method").val("get");
-        $(form_element).attr("action","/recipes/" + current_id.slice(16) );
-        $(form_element).attr("method","get" );
-        $(form_element).submit()
+        window.location.href = "/recipes/" + current_id.slice(16)
+        // $("#_method").val("get");
+        // $(form_element).attr("action","/recipes/" + current_id.slice(16) );
+        // $(form_element).attr("method","get" );
+        // $(form_element).submit()
         break;
 
       // user clicked on Create from the add display
@@ -97,11 +99,18 @@ $(document).on ('page:change', function() {
 
       // user clicked on the add button on the main recipes list
       case ( current_id.match(/^btn-add-comment/) == "btn-add-comment" ) :
-        $("#_method").val("get");
-        $(form_element).attr("method","get" );
-        $(form_element).attr("action","/recipes/" + $("#recipe_id").val() + "/comments/new" );
+        $("#_method").val("patch");
+        $(form_element).attr("method","post" );
+        $(form_element).attr("action","/recipes/" + $("#recipe_id").val() );
         $(form_element).submit()
         break;
+
+     // user clicked on an delete button in the list
+     case ( current_id.match(/^btn-delete-comment/) == "btn-delete-comment" ) :
+       $("#_method").val("delete");
+       $(form_element).attr("action","/recipes/" + $("#recipe_id").val() + "/comments/" + current_id.slice(19) );
+       $(form_element).submit()
+       break;
 
     }
 

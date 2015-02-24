@@ -96,7 +96,15 @@
             </td>
             <td>
               <div class="form-group field">
-                <%= comment.object.rating %>
+                <select id="backing-<%= comment.object.id %>" disabled>
+                  <option value="0" <%= comment.object.rating == 0 ? "selected" : nil %>>Bad</option>
+                  <option value="1" <%= comment.object.rating == 1 ? "selected" : nil %>>So-so</option>
+                  <option value="2" <%= comment.object.rating == 2 ? "selected" : nil %>>Ok</option>
+                  <option value="3" <%= comment.object.rating == 3 ? "selected" : nil %>>Pretty Good</option>
+                  <option value="4" <%= comment.object.rating == 4 ? "selected" : nil %>>Excellent</option>
+                  <option value="5" <%= comment.object.rating == 5 ? "selected" : nil %>>Outstanding</option>
+                </select>
+                <div class="rateit" data-rateit-backingfld="#backing-<%= comment.object.id %>"></div>
               </div>
             </td>
           </tr>

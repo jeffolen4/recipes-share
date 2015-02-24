@@ -99,7 +99,6 @@
     <% if object["action"] == "edit" %>
     <button class="btn btn-primary" type="button" id="btn-update-recipe-<%= @recipe.id %>">Update</button>
     <button class="btn btn-primary" type="button" id="btn-show-recipe-<%= @recipe.id %>">Show</button>
-    <button class="btn btn-primary" type="button" id="btn-add-comment-<%= @recipe.id %>">Add Comment</button>
     <% end %>
     <button class="btn btn-primary" type="button" id="btn-back-recipe">Back</button>
   </div>
@@ -109,9 +108,10 @@
         <table class="table table-hover table-bordered">
           <thead>
             <tr>
-              <th class="col-sm-8">Comments</th>
+              <th class="col-sm-7">Comments</th>
               <th class="col-sm-2">Entered By</th>
-              <th class="col-sm-1">Stars</th>
+              <th class="col-sm-2">Stars</th>
+              <th class="col-sm-1">Action</th>
             </tr>
           </thead>
 
@@ -122,20 +122,55 @@
             <%= f.fields_for :comments do |comment| %>
             <tr>
               <td>
-                <%= comment.hidden_field :id %>
                 <div class="form-group field">
-                  <%= comment.object.comment %>
+                <% if comment.object.persisted? %>
+                  <%= comment.hidden_field :id %>
+                  <%= comment.text_area( :comment, class: "textarea-style2", disabled: true  ) %>
+                <% else %>
+                  <%= comment.text_area( :comment, class: "textarea-style2" ) %>
+                <% end %>
                 </div>
               </td>
               <td>
                 <div class="form-group field">
-                  <%= comment.object.entered_by %>
+                  <% if comment.object.persisted? %>
+                    <%= comment.object.entered_by %>
+                  <% else %>
+                    <%= comment.text_field :entered_by %>
+                  <% end %>
                 </div>
               </td>
               <td>
                 <div class="form-group field">
-                  <%= comment.object.rating %>
+                <% if !comment.object.persisted? %>
+                    <select id="backing-new" name="new_rate" data-new-row="Y">
+                <% else %>
+                    <select id="backing-<%= comment.object.id %>" disabled>
+                <% end %>
+                      <option value="0" <%= comment.object.rating == 0 ? "selected" : nil %>>Bad</option>
+                      <option value="1" <%= comment.object.rating == 1 ? "selected" : nil %>>So-so</option>
+                      <option value="2" <%= comment.object.rating == 2 ? "selected" : nil %>>Ok</option>
+                      <option value="3" <%= comment.object.rating == 3 ? "selected" : nil %>>Pretty Good</option>
+                      <option value="4" <%= comment.object.rating == 4 ? "selected" : nil %>>Excellent</option>
+                      <option value="5" <%= comment.object.rating == 5 ? "selected" : nil %>>Outstanding</option>
+                    </select>
+                    <% if !comment.object.persisted? %>
+                      <div class="rateit" data-rateit-backingfld="#backing-new"></div>
+                    <% else %>
+                      <div class="rateit" data-rateit-backingfld="#backing-<%= comment.object.id %>"></div>
+                    <% end %>
                 </div>
+              </td>
+              <td>
+                <% if !comment.object.persisted? %>
+                    <button class="btn btn-primary" type="button" id="btn-add-comment-<%= @recipe.id %>" aria-label="Left Align">
+                      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </button>
+                <% else %>
+                    <button class="btn btn-primary" type="button" id="btn-delete-comment-<%= comment.object.id %>" aria-label="Left Align">
+                      <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                    </button>
+                <% end %>
               </td>
             </tr>
             <% end %>

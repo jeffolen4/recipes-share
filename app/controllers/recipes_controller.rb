@@ -17,12 +17,10 @@ class RecipesController < ApplicationController
   # GET /recipes/new
   def new
     @recipe = Recipe.new
-    # @recipe.ingredients.build
   end
 
   # GET /recipes/1/edit
   def edit
-    logger.debug "attempting to edit. params: #{params}"
   end
 
   # POST /recipes
@@ -31,6 +29,11 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
 
     respond_to do |format|
+      new_comment_key = params[:recipe][:comments_attributes].keys[-1]
+      if params["new_rate"] != nil
+        params[:recipe][:comments_attributes][new_comment_key]["rating"] = params["new_rate"]
+      end
+      
       if @recipe.save
         format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
         format.json { render :show, status: :created, location: @recipe }
@@ -45,6 +48,11 @@ class RecipesController < ApplicationController
   # PATCH/PUT /recipes/1.json
   def update
     respond_to do |format|
+      new_comment_key = params[:recipe][:comments_attributes].keys[-1]
+      if params["new_rate"] != nil
+        params[:recipe][:comments_attributes][new_comment_key]["rating"] = params["new_rate"]
+      end
+
       if @recipe.update(recipe_params)
         format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.' }
         format.json { render :show, status: :ok, location: @recipe }
@@ -100,6 +108,6 @@ class RecipesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_params
-      params.require(:recipe).permit(:name, :directions, :rating, ingredients_attributes: [:id, :name, :amount, :uom])
+      params.require(:recipe).permit(:name, :directions, :rating, ingredients_attributes: [:id, :name, :amount, :uom], comments_attributes: [:id, :comment, :rating, :entered_by ])
     end
 end
