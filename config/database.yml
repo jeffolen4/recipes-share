@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: recipes-share_production
-  username: recipes-share
-  password: <%= ENV['RECIPES-SHARE_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
