@@ -7,6 +7,10 @@ class RecipesController < ApplicationController
   # GET /recipes.json
   def index
     @recipes = Recipe.includes(:ingredients, :comments).all
+    @recipes.each_index do |idx|
+      @recipes[idx].rating = Comment.where(["recipe_id = ?", @recipes[idx].id ]).average(:rating)
+      logger.debug "rating for #{@recipes[idx].id} is #{@recipes[idx].rating}."
+    end
   end
 
   # GET /recipes/1
@@ -33,7 +37,7 @@ class RecipesController < ApplicationController
       if params["new_rate"] != nil
         params[:recipe][:comments_attributes][new_comment_key]["rating"] = params["new_rate"]
       end
-      
+
       if @recipe.save
         format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
         format.json { render :show, status: :created, location: @recipe }

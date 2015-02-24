@@ -26,12 +26,12 @@
             <td><%= recipe.name %></td>
             <td>
               <select id="backing-<%= recipe.id %>" disabled>
-                <option value="0">Bad</option>
-                <option value="1">So-so</option>
-                <option value="2">Ok</option>
-                <option value="3">Pretty Good</option>
-                <option value="4">Excellent</option>
-                <option value="5">Outstanding</option>
+                <option value="0" <%= recipe.rating == 0 ? "selected" : nil %>>Bad</option>
+                <option value="1" <%= recipe.rating == 1 ? "selected" : nil %>>So-so</option>
+                <option value="2" <%= recipe.rating == 2 ? "selected" : nil %>>Ok</option>
+                <option value="3" <%= recipe.rating == 3 ? "selected" : nil %>>Pretty Good</option>
+                <option value="4" <%= recipe.rating == 4 ? "selected" : nil %>>Excellent</option>
+                <option value="5" <%= recipe.rating == 5 ? "selected" : nil %>>Outstanding</option>
               </select>
               <div class="rateit" data-rateit-backingfld="#backing-<%= recipe.id %>"></div>
             </td>
