@@ -82,7 +82,11 @@ class RecipesController < ApplicationController
         end
         format.html { redirect_to edit_recipe_path(@recipe.id) }
       else
-        format.html { render :edit }
+        if params["newrow"] == "Y"
+          format.html { render :new }
+        else
+          format.html { render :edit }
+        end
         format.json { render json: @recipe.errors, status: :unprocessable_entity }
       end
     end
