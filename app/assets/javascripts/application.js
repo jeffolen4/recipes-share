@@ -14,5 +14,6 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
+//= require jquery.rateit.min
+//= require recipes
 //= require bootstrap-sprockets
