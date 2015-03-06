@@ -1,17 +1,16 @@
 <% content_for(:title, "Recipes List | RecipeBlogger") %>
 
-<div class="container">
   <div class="row">
 
     <p id="notice"><%= notice %></p>
 
-    <h2>Listing Recipes</h2>
+    <h3>Recipes</h3>
 
 
     <form id="recipe-form" class="form-styled" action="/recipes/new" method="post">
       <input id="_method" name="_method" type="hidden" value="post">
 
-      <table class="table table-hover table-stripped table-bordered">
+      <table class="table table-hover table-stripped table-bordered recipe-table">
         <thead>
           <tr>
             <th class="col-sm-3">Name</th>
@@ -36,7 +35,7 @@
               <div class="rateit" data-rateit-backingfld="#backing-<%= recipe.id %>"></div>
             </td>
               <td>
-                <div class="btn-group btn-group-sm">
+                <div class="btn-group btn-group-sm recipe-btn">
                   <button class="btn btn-primary" type="button" id="btn-show-recipe-<%= recipe.id %>" aria-label="Left Align">
                     <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                   </button>
@@ -55,9 +54,8 @@
 
         <br>
 
-        <div class="btn-group">
+        <div class="btn-group recipe-btn">
           <button class="btn btn-primary" type="button" id="btn-add-recipe">Add Recipe</button>
         </div>
       </form>
     </div>
-  </div>

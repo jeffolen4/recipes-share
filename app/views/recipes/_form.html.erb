@@ -22,7 +22,7 @@
   <tr>
   <th>Ingredients</th>
   <td>
-    <table class="table table-hover table-bordered">
+    <table class="table table-hover table-bordered recipe-table">
       <thead>
         <tr>
           <th class="col-sm-4"><%= label( :ingredient, :name   ) %></th>
@@ -35,7 +35,7 @@
       <tfoot>
         <tr>
           <td colspan=4 align="center">
-            <p>
+            <p class="recipe-btn">
             <button class="btn btn-primary" type="button" id="btn-add-ingredient"
                   data-new-row="<%= f.object.persisted? ? "N" : "Y" %>"  aria-label="Left Align">
               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Ingredients
@@ -70,7 +70,7 @@
           </td>
           <td>
             <% if ing_form.object.persisted? %>
-            <div class="btn-group btn-group-sm">
+            <div class="btn-group btn-group-sm recipe-btn">
               <button class="btn btn-primary" type="button" id="btn-delete-ingredient-<%= ing_form.object.id %>" aria-label="Left Align">
                 <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
               </button>
@@ -92,7 +92,7 @@
 </table>
 
   <input id="_method" name="_method" type="hidden" value="post">
-  <div class="btn-group btn-group-med">
+  <div class="btn-group btn-group-med recipe-btn">
     <% if object["action"] == "create" %>
     <button class="btn btn-primary" type="button" id="btn-create-recipe">Create</button>
     <% end %>
@@ -106,7 +106,7 @@
 
   <br><br>
         <!--  Comments -->
-        <table class="table table-hover table-bordered">
+        <table class="table table-hover table-bordered recipe-table">
           <thead>
             <tr>
               <th class="col-sm-8">Comments</th>

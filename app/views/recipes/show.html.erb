@@ -1,23 +1,18 @@
 <% content_for(:title, "View Recipe | RecipeBlogger") %>
 
-<div class="container">
   <div class="row">
 
     <p id="notice"><%= notice %></p>
 
-    <h2>Viewing Recipe</h2>
+    <h3>Recipe: <%= @recipe.name %></h3>
 
     <%= form_for @recipe do |f| %>
 
     <table class="table">
       <tr>
-        <td><%= label( :recipe, :name ) %></td>
-        <td><%= text_field( :recipe, :name, size: 40, disabled: "disabled" ) %></td>
-      </tr>
-      <tr>
         <th>Ingredients</th>
         <td>
-          <table class="table table-hover table-bordered">
+          <table class="table table-hover table-bordered recipe-table">
             <thead>
               <tr>
                 <th class="col-sm-4"><%= label( :ingredient, :name   ) %></th>
@@ -61,14 +56,14 @@
       </table>
 
       <br>
-      <div class="btn-group">
+      <div class="btn-group recipe-btn">
         <button class="btn btn-primary" type="button" id="btn-edit-recipe-<%= @recipe.id %>">Edit</button>
         <button class="btn btn-primary" type="button" id="btn-back-recipe">Back</button>
       </div>
 
 <br><br>
       <!--  Comments -->
-      <table class="table table-hover table-bordered">
+      <table class="table table-hover table-bordered recipe-table">
         <thead>
           <tr>
             <th class="col-sm-8">Comments</th>

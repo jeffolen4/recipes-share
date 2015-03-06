@@ -1,11 +1,9 @@
 <% content_for(:title, "Edit Recipe | RecipeBlogger") %>
 
-<div class="container">
   <div class="row">
 
-    <h2>Editing Recipe</h2>
+    <h3>Edit Recipe: <%= @recipe.name %></h3>
 
     <%= render('form', :object => { "action" => "edit" } ) %>
 
   </div>
-</div>
