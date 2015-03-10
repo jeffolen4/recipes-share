@@ -55,7 +55,7 @@ $(document).on ('page:change', function() {
         $(form_element).submit()
         break;
 
-      // user clicked on Create from the add display
+    //   // user clicked on Create from the add display
       case ( current_id.match(/^btn-create-recipe/) == "btn-create-recipe" ) :
         $("#_method").val("post");
         $(form_element).attr("action","/recipes" );

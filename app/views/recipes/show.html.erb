@@ -1,127 +1,127 @@
 <% content_for(:title, "View Recipe | RecipeBlogger") %>
 
-  <div class="row">
+<div class="row">
 
-    <p id="notice"><%= notice %></p>
+  <p id="notice"><%= notice %></p>
 
-    <h3>Recipe: <%= @recipe.name %></h3>
+  <h3 class="recipe-header">Recipe: <%= @recipe.name %></h3>
 
-    <%= form_for @recipe do |f| %>
+  <%= form_for @recipe do |f| %>
 
-    <table class="table">
+  <table class="table">
+    <tr>
+      <th>Ingredients</th>
+      <td>
+        <table class="table table-hover table-bordered recipe-table">
+          <thead>
+            <tr>
+              <th class="col-sm-4"><%= label( :ingredient, :name   ) %></th>
+              <th class="col-sm-1"><%= label( :ingredient, :amount ) %></th>
+              <th class="col-sm-1"><%= label( :ingredient, :uom    ) %></th>
+            </tr>
+          </thead>
+
+          <tfoot>
+          </tfoot>
+
+          <tbody>
+            <%= f.fields_for :ingredients do |ing_form| %>
+            <tr>
+              <td>
+                <%= ing_form.hidden_field :id %>
+                <div class="form-group field">
+                  <%= ing_form.object.name %>
+                </div>
+              </td>
+              <td>
+                <div class="form-group field">
+                  <%= ing_form.object.amount %>
+                </div>
+              </td>
+              <td>
+                <div class="form-group field">
+                  <%= ing_form.object.uom %>
+                </div>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+
+        </table>
+      </td>
       <tr>
-        <th>Ingredients</th>
-        <td>
-          <table class="table table-hover table-bordered recipe-table">
-            <thead>
-              <tr>
-                <th class="col-sm-4"><%= label( :ingredient, :name   ) %></th>
-                <th class="col-sm-1"><%= label( :ingredient, :amount ) %></th>
-                <th class="col-sm-1"><%= label( :ingredient, :uom    ) %></th>
-              </tr>
-            </thead>
+        <td><%= label( :recipe, :directions) %></td>
+        <td><%= text_area( :recipe, :directions, class: "textarea-styled", disabled: "disabled" ) %></td>
+      </tr>
+    </table>
 
-            <tfoot>
-            </tfoot>
-
-            <tbody>
-              <%= f.fields_for :ingredients do |ing_form| %>
-              <tr>
-                <td>
-                  <%= ing_form.hidden_field :id %>
-                  <div class="form-group field">
-                    <%= ing_form.object.name %>
-                  </div>
-                </td>
-                <td>
-                  <div class="form-group field">
-                    <%= ing_form.object.amount %>
-                  </div>
-                </td>
-                <td>
-                  <div class="form-group field">
-                    <%= ing_form.object.uom %>
-                  </div>
-                </td>
-              </tr>
-              <% end %>
-            </tbody>
-
-          </table>
-        </td>
-        <tr>
-          <td><%= label( :recipe, :directions) %></td>
-          <td><%= text_area( :recipe, :directions, class: "textarea-styled", disabled: "disabled" ) %></td>
-        </tr>
-      </table>
-
-      <br>
-      <div class="btn-group recipe-btn">
-        <button class="btn btn-primary" type="button" id="btn-edit-recipe-<%= @recipe.id %>">Edit</button>
-        <button class="btn btn-primary" type="button" id="btn-back-recipe">Back</button>
-      </div>
-
-<br><br>
-      <p><h4>Tell us what you think...</h4></p>
-      <p align='left'>
-        <select id="select-rating">
-          <option value="0">Bad</option>
-          <option value="1">So-so</option>
-          <option value="2">Ok</option>
-          <option value="3">Pretty Good</option>
-          <option value="4">Excellent</option>
-          <option value="5">Outstanding</option>
-        </select>
-        <div class="rateit" id="recipe-rating" data-rateit-backingfld="#select-rating"></div>
-        <input type="hidden" id="rating" name="comment[rating]">
-      </p>
-      <p><%= text_area( :comment, :comment, class: "textarea-styled") %></p>
-      <p align='center'>
-        <div class="recipe-btn">
-          <button class="btn btn-primary" type="button" id="btn-add-comment-<%= @recipe.id %>">Add Comment</button>
-        </div>
-      </p>
-
-      <!--  Comments -->
-      <table class="table table-hover table-bordered recipe-table">
-        <thead>
-          <tr>
-            <th class="col-sm-8">Comments</th>
-            <th class="col-sm-1">Stars</th>
-          </tr>
-        </thead>
-
-        <tfoot>
-        </tfoot>
-
-        <tbody>
-          <%= f.fields_for :comments do |comment| %>
-          <tr>
-            <td>
-              <%= comment.hidden_field :id %>
-              <div class="form-group field">
-                <%= comment.object.comment %>
-              </div>
-            </td>
-            <td>
-              <div class="form-group field">
-                <select id="display-rating-<%= comment.object.id %>">
-                  <option value="0">Bad</option>
-                  <option value="1">So-so</option>
-                  <option value="2">Ok</option>
-                  <option value="3">Pretty Good</option>
-                  <option value="4">Excellent</option>
-                  <option value="5">Outstanding</option>
-                </select>
-                <div class="rateit" id="recipe-rating" data-rateit-backingfld="#display-rating-<%= comment.object.id %>"  data-rateit-value="<%= comment.object.rating %>" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
-              </div>
-            </td>
-          </tr>
-          <% end %>
-        </tbody>
-
-      </table>
-      <% end %>
-
+    <br>
+    <div class="btn-group recipe-btn">
+      <button class="btn btn-primary" type="button" id="btn-edit-recipe-<%= @recipe.id %>">Edit</button>
+      <button class="btn btn-primary" type="button" id="btn-back-recipe">Back</button>
     </div>
+
+    <br><br>
+    <p><h4>Tell us what you think...</h4></p>
+    <p align='left'>
+      <select id="select-rating">
+        <option value="0">Bad</option>
+        <option value="1">So-so</option>
+        <option value="2">Ok</option>
+        <option value="3">Pretty Good</option>
+        <option value="4">Excellent</option>
+        <option value="5">Outstanding</option>
+      </select>
+      <div class="rateit" id="recipe-rating" data-rateit-backingfld="#select-rating"></div>
+      <input type="hidden" id="rating" name="comment[rating]">
+    </p>
+    <p><%= text_area( :comment, :comment, class: "textarea-styled") %></p>
+    <p align='center'>
+      <div class="recipe-btn">
+        <button class="btn btn-primary" type="button" id="btn-add-comment-<%= @recipe.id %>">Add Comment</button>
+      </div>
+    </p>
+
+    <!--  Comments -->
+    <table class="table table-hover table-bordered recipe-table">
+      <thead>
+        <tr>
+          <th class="col-sm-8">Comments</th>
+          <th class="col-sm-1">Stars</th>
+        </tr>
+      </thead>
+
+      <tfoot>
+      </tfoot>
+
+      <tbody>
+        <%= f.fields_for :comments do |comment| %>
+        <tr>
+          <td>
+            <%= comment.hidden_field :id %>
+            <div class="form-group field">
+              <%= comment.object.comment %>
+            </div>
+          </td>
+          <td>
+            <div class="form-group field">
+              <select id="display-rating-<%= comment.object.id %>">
+                <option value="0">Bad</option>
+                <option value="1">So-so</option>
+                <option value="2">Ok</option>
+                <option value="3">Pretty Good</option>
+                <option value="4">Excellent</option>
+                <option value="5">Outstanding</option>
+              </select>
+              <div class="rateit" id="recipe-rating" data-rateit-backingfld="#display-rating-<%= comment.object.id %>"  data-rateit-value="<%= comment.object.rating %>" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+            </div>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+
+    </table>
+    <% end %>
+
   </div>
+</div>

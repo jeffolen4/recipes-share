@@ -5,6 +5,9 @@ thead {
   background-color: lightgrey;
 }
 
+.recipe-header {
+  font-family: 'Hoefler Text', Georgia, 'Times New Roman', serif;
+}
 
 .textarea-styled {
   width: 600px;
@@ -13,12 +16,12 @@ thead {
   padding: 5px;
   font-family: Tahoma, sans-serif;
 }
-
 .hidden {
   display: none;
 }
 
 .recipe-table th {
+  color: white;
   background-color: #548905;
 }
 
@@ -26,7 +29,7 @@ thead {
   background-color: #548905;
 }
 .recipe-btn button:hover {
-  background-color: #2B4B08;
+  background-color: #345303;
 }
 
 .container .header {
@@ -67,7 +70,8 @@ thead {
 }
 
 .header .text-line1 {
-  color: #1F340F;
+  color: white;
+  // color: #1F340F;
   font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
 	font-weight: normal;
   font-size: 1.50em;
@@ -79,7 +83,8 @@ thead {
 }
 
 .header .text-line2 {
-  color: #1F340F;
+  color: white;
+  // color: #1F340F;
   font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
 	font-weight: normal;
   font-size: 2.25em;

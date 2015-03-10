@@ -1,4 +1,4 @@
-  <%= form_for setup_recipe( @recipe ) do |f| %>
+<%= form_for setup_recipe( @recipe ) do |f| %>
   <% if @recipe.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
@@ -37,7 +37,7 @@
           <td colspan=4 align="center">
             <p class="recipe-btn">
             <button class="btn btn-primary" type="button" id="btn-add-ingredient"
-                  data-new-row="<%= f.object.persisted? ? "N" : "Y" %>"  aria-label="Left Align">
+                  data-new-row="<%= @recipe.persisted? ? "N" : "Y" %>"  aria-label="Left Align">
               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Ingredients
             </button>
             &nbsp;Click on ingredient(s) to edit</p>
@@ -70,11 +70,14 @@
           </td>
           <td>
             <% if ing_form.object.persisted? %>
+            <form method="post" action="/recipes/<%= ing_form.object.recipe_id %>/ingredients/<%= ing_form.object.id %>">
             <div class="btn-group btn-group-sm recipe-btn">
-              <button class="btn btn-primary" type="button" id="btn-delete-ingredient-<%= ing_form.object.id %>" aria-label="Left Align">
+              <%= button_to recipe_ingredient_path(@recipe.id, ing_form.object.id ), class: "btn btn-primary",
+              method: :delete, data: {confirm: "Are you sure you want to delete this ingredient?"}, type: "button" do %>
                 <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-              </button>
+              <% end %>
             </div>
+          </form>
             <% end %>
           </td>
         </tr>
@@ -165,5 +168,4 @@
 
         </table>
 
-  </form>
-<% end %>
+  <% end %>
