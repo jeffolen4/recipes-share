@@ -7,6 +7,9 @@ class RecipesController < ApplicationController
   # GET /recipes.json
   def index
     @recipes = Recipe.includes(:ingredients, :comments).all
+    @recipes.each do |r|
+      r.update_columns(rating: r.comments.average(:rating))
+    end
   end
 
   # GET /recipes/1
@@ -17,7 +20,6 @@ class RecipesController < ApplicationController
   # GET /recipes/new
   def new
     @recipe = Recipe.new
-    # @recipe.ingredients.build
   end
 
   # GET /recipes/1/edit

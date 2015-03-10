@@ -82,14 +82,14 @@ $(document).on ('page:change', function() {
 
       // user clicked on the update button on the Edit display
       case ( current_id.match(/^btn-update-recipe/) == "btn-update-recipe" ) :
-        $("#_method").val("patch");
+        $("[name=_method]").val("patch");
         $(form_element).attr("action","/recipes/" + current_id.slice(18) );
         $(form_element).submit()
         break;
 
       // user clicked on an delete button in the list
       case ( current_id.match(/^btn-delete-recipe/) == "btn-delete-recipe" ) :
-        $("#_method").val("delete");
+        $("[name=_method]").val("delete");
         $(form_element).attr("action","/recipes/" + current_id.slice(18) );
         $(form_element).submit()
         break;
@@ -97,9 +97,10 @@ $(document).on ('page:change', function() {
 
       // user clicked on the add button on the main recipes list
       case ( current_id.match(/^btn-add-comment/) == "btn-add-comment" ) :
-        $("#_method").val("get");
-        $(form_element).attr("method","get" );
-        $(form_element).attr("action","/recipes/" + $("#recipe_id").val() + "/comments/new" );
+        $("#rating").val( $(".rateit").rateit("value") )
+        $("[name=_method]").val("post");
+        $(form_element).attr("method","post" );
+        $(form_element).attr("action","/recipes/" + current_id.slice(16) + "/comments" );
         $(form_element).submit()
         break;
 

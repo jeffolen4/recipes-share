@@ -32,7 +32,8 @@
                 <option value="4">Excellent</option>
                 <option value="5">Outstanding</option>
               </select>
-              <div class="rateit" data-rateit-backingfld="#backing-<%= recipe.id %>"></div>
+              <div class="rateit" data-rateit-backingfld="#backing-<%= recipe.id %>"
+                data-rateit-value="<%= recipe.rating %>" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
             </td>
               <td>
                 <div class="btn-group btn-group-sm recipe-btn">

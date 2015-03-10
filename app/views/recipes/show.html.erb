@@ -62,12 +62,31 @@
       </div>
 
 <br><br>
+      <p><h4>Tell us what you think...</h4></p>
+      <p align='left'>
+        <select id="select-rating">
+          <option value="0">Bad</option>
+          <option value="1">So-so</option>
+          <option value="2">Ok</option>
+          <option value="3">Pretty Good</option>
+          <option value="4">Excellent</option>
+          <option value="5">Outstanding</option>
+        </select>
+        <div class="rateit" id="recipe-rating" data-rateit-backingfld="#select-rating"></div>
+        <input type="hidden" id="rating" name="comment[rating]">
+      </p>
+      <p><%= text_area( :comment, :comment, class: "textarea-styled") %></p>
+      <p align='center'>
+        <div class="recipe-btn">
+          <button class="btn btn-primary" type="button" id="btn-add-comment-<%= @recipe.id %>">Add Comment</button>
+        </div>
+      </p>
+
       <!--  Comments -->
       <table class="table table-hover table-bordered recipe-table">
         <thead>
           <tr>
             <th class="col-sm-8">Comments</th>
-            <th class="col-sm-2">Entered By</th>
             <th class="col-sm-1">Stars</th>
           </tr>
         </thead>
@@ -86,12 +105,15 @@
             </td>
             <td>
               <div class="form-group field">
-                <%= comment.object.entered_by %>
-              </div>
-            </td>
-            <td>
-              <div class="form-group field">
-                <%= comment.object.rating %>
+                <select id="display-rating-<%= comment.object.id %>">
+                  <option value="0">Bad</option>
+                  <option value="1">So-so</option>
+                  <option value="2">Ok</option>
+                  <option value="3">Pretty Good</option>
+                  <option value="4">Excellent</option>
+                  <option value="5">Outstanding</option>
+                </select>
+                <div class="rateit" id="recipe-rating" data-rateit-backingfld="#display-rating-<%= comment.object.id %>"  data-rateit-value="<%= comment.object.rating %>" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
               </div>
             </td>
           </tr>
