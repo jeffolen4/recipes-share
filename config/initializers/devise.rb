@@ -205,7 +205,7 @@ Devise.setup do |config|
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
   # "users/sessions/new". It's turned off by default because it's slower if you
   # are using only default views.
-  # config.scoped_views = false
+  config.scoped_views = true
 
   # Configure the default scope given to Warden. By default it's the first
   # devise role declared in your routes (usually :user).
@@ -234,6 +234,8 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   config.omniauth :facebook, "841955125840893", "aac64eb77f808ec1c66e55c5fe8cd8fe"
+  config.omniauth :twitter, "njGTXTxtdSTUus7LaLWJBDPFx", "ngIe6hKdZM6acc7RKNveM0BCU3RoYCuiJKYOkZMlEETXpJzH95"
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
