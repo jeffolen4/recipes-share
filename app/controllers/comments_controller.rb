@@ -38,7 +38,8 @@ class CommentsController < ApplicationController
         format.html { redirect_to [@recipe], notice: 'Comment was successfully created.' }
         format.json { render [@recipe], status: :created, location: [@recipe] }
       else
-        format.html { render :new }
+        #format.html { render :new }
+        format.html { render :template => 'recipes/show', :id => @recipe.id }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
@@ -52,7 +53,8 @@ class CommentsController < ApplicationController
         format.html { redirect_to [@recipe, @comment], notice: 'Comment was successfully updated.' }
         format.json { render [@recipe, @comment], status: :ok, location: [@recipe, @comment] }
       else
-        format.html { render :edit }
+        #format.html { render :edit }
+        format.html { render :controller => "recipes", :action => "show", :id => @recipe.id }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
